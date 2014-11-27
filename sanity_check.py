@@ -39,5 +39,8 @@ def process(filename):
                 names.append(b)
 
 if __name__ == '__main__':
+    if len(sys.argv) < 2:
+        print("USAGE: %s filename" % sys.argv[0])
+        sys.exit()
     filename = sys.argv[1]
     process(filename)
