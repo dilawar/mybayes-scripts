@@ -32,7 +32,9 @@ fi
 
 file="$1"
 echo "Copying input file to current directory"
-cp $file .
+if [ ! -f $file]; then
+    cp $file .
+fi
 file=`basename $file`
 COMMAND="$2"
 TIMESTAMP=`date +%Y%m%d%H%M%S`
