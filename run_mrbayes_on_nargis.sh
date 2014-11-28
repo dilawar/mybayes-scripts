@@ -9,10 +9,10 @@ exclude  1-160 211-260 364-384;
 lset applyto=(1,2,3) nst=6 rates=gamma;
 unlink statefreq=(all) revmat=(all) shape=(all) pinvar=(all);
 prset applyto=(all) ratepr=variable;
-mcmcp ngen=10000000 samplefreq=10000 printfreq=1000 nruns=4 nchains=4 mcmcdiagn=yes diagnfreq=1000000 burnin=200;
-mcmc burnin=200;
-sumt burnin=200;
-sump burnin=200;
+mcmcp ngen=10000000 samplefreq=10000 printfreq=1000 nruns=4 nchains=4 mcmcdiagn=yes diagnfreq=1000000 burnin=1000;
+mcmc burnin=1000;
+sump burnin=1000 Outputname=sump.stat Printtofile=Yes;
+sumt burnin=1000;
 "
 ## This is run.sh
 run="#!/bin/bash
