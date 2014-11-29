@@ -32,7 +32,7 @@ fi
 
 file="$1"
 echo "Copying input file to current directory"
-if [ ! -f $file]; then
+if [ ! -f $file ]; then
     cp $file .
 fi
 file=`basename $file`

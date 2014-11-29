@@ -1,4 +1,4 @@
-execute nd4_cytb_25nov.nex;
+execute Unique_cytb.nex;
 partition mtgenes = 3: CR, cytB, struct;
 set partition = mtgenes;
 exclude  1-160 211-260 364-384;
