@@ -10,13 +10,14 @@ lset applyto=(1,2,3) nst=6 rates=gamma;
 unlink statefreq=(all) revmat=(all) shape=(all) pinvar=(all);
 prset applyto=(all) ratepr=variable;
 mcmcp ngen=10000000 samplefreq=10000 printfreq=1000 nruns=4 nchains=4 mcmcdiagn=yes diagnfreq=1000000 burnin=1000;
-mcmc burnin=1000;
-sump burnin=1000 Outputname=sump.stat Printtofile=Yes;
-sumt burnin=1000;
-"
+mcmc burnin=1000;"
+command1="sump burnin=1000 Outputname=sump.stat Printtofile=Yes;
+sumt burnin=1000;"
+
 ## This is run.sh
 run="#!/bin/bash
 mb < command.txt > mrbayes.log
+mb < command1.txt >> mrbayes.log
 "
 
 set -e
@@ -46,15 +47,13 @@ mkdir -p $WORKDIR
 echo "Generating files to be sent to server"
 rm -f command.txt run.sh
 printf "execute $file;\n$command\n" > command.txt
+printf "execute $file;\n$command1\n" > command1.txt
 echo "$run" > run.sh
 chmod +x run.sh
 
 echo "Sending file to NARGIS server"
-rsync -azv $file plot*.sh run.sh sge.sh command.txt nargis:$WORKDIR
+rsync -azv $file plot*.sh run.sh sge.sh command.txt command1.txt nargis:$WORKDIR
 ssh -T nargis << EOF
 cd $WORKDIR && qsub sge.sh
 EOF
 echo "Done"
-	
-	
-
